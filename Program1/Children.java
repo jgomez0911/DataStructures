@@ -34,8 +34,8 @@ public class Children {
         return this.name.equalsIgnoreCase(o.getName()) && this.age == o.getAge();
     }
 
+    @Override
     public String toString(){
         return "Name: " + this.name + ", Age: " + this.age;
     }
-
 }
