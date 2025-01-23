@@ -54,6 +54,11 @@ public class Hw1 {
             this.y = y;
         }
 
+        public Point(Point p){
+            this.x = p.x;
+            this.y = p.y;
+        }
+
         public double getX(){
             return this.x;
         }
@@ -62,18 +67,79 @@ public class Hw1 {
             return this.y;
         }
 
-        public double setX(double x){
-           return this.x = x;
+        public void setX(double x){
+           this.x = x;
         }
 
-        public double setY(double y){
-           return this.y = y;
+        public void setY(double y){
+           this.y = y;
+        }
+
+        public boolean equals(Object o){
+            return (((Point) o).getX() == this.x && ((Point) o).getY() == this.y);
         }
 
         @Override
         public String toString(){
             return "(" + this.x + "," + this.y + ")";
         }
+    }
+
+    public class Line{
+
+        private Point start;
+        private Point end;
+
+        public Line(Point start,Point end){
+            this.start = start;
+            this.end = end;
+        }
+
+        public Point getStart(){
+            return this.start;
+        }
+
+        public Point getEnd(){
+            return this.end;
+        }
+
+        public void setStart(Point start){
+            this.start = start;
+        }
+
+        public void setEnd(Point end){
+            this.end = end;
+        }
+
+        public double length(){
+           return Math.sqrt(Math.pow(end.x-start.x,2)+ Math.pow(end.y-start.y,2));
+        }
+
+        public Point midPoint(){
+            return new Point((start.x + end.x) / 2,(start.y + end.y)/2);
+        }
+
+        public Line longestLine( Line[] lineArray ){
+            Line longest = new Line(new Point(0.0,0.0), new Point(0.0,0.0));
+            for (Line line: lineArray){
+                if (line.length() > longest.length()){
+                    longest = line;
+                }
+            }
+            return longest;
+        }
+
+        public void deleteOriginLines( Line[] lineArray ){
+            start = new Point(0.0,0.0);
+            end = new Point(0.0,0.0);
+
+            for (Line line: lineArray){
+                if (line.getStart() == start || line.getEnd() == end){
+                    line = null;
+                }
+            }
+        }
 
     }
+
 }
