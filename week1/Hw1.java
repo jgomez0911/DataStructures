@@ -1,4 +1,7 @@
 package week1;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 public class Hw1 {
 
@@ -138,6 +141,21 @@ public class Hw1 {
                     line = null;
                 }
             }
+        }
+
+        public Line longestLine(ArrayList<Line> lineList) {
+             // Sort the list based on the length of the lines
+            //Collections.sort(lineList); the sort is giving an error
+
+             // Return the last element, which is the longest line
+            return lineList.get(lineList.size() - 1);
+        }
+
+        public void deleteOriginLines(ArrayList<Line> lineList) {
+            start = new Point(0.0, 0.0);
+            end = new Point(0.0, 0.0);
+
+            lineList.removeIf(line -> line.getStart().equals(start) || line.getEnd().equals(end));
         }
 
     }
