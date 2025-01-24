@@ -1,6 +1,5 @@
 package week1;
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class Hw1 {
 
@@ -77,8 +76,28 @@ public class Hw1 {
            this.y = y;
         }
 
-        public boolean equals(Object o){
-            return (((Point) o).getX() == this.x && ((Point) o).getY() == this.y);
+        @Override
+        public boolean equals(Object o) {
+            // Check if the object is the same instance
+            if (this == o) return true;
+
+            // Check if the object is null or not an instance of Point
+            if (o == null || getClass() != o.getClass()) return false;
+
+            // Cast to Point and compare fields
+            Point point = (Point) o;
+
+            // Use a small epsilon value for double comparison
+            double epsilon = 1e-10; // Adjust this value as needed
+            return Math.abs(x - point.x) < epsilon && Math.abs(y - point.y) < epsilon;
+        }
+
+        @Override
+        public int hashCode() {
+            // Use a prime number to generate a hash code
+            long xBits = Double.doubleToLongBits(x);
+            long yBits = Double.doubleToLongBits(y);
+            return 31 * Long.hashCode(xBits) + Long.hashCode(yBits);
         }
 
         @Override
@@ -136,17 +155,15 @@ public class Hw1 {
             end = new Point(0.0,0.0);
 
             for (Line line: lineArray){
-                if (line.getStart() == start || line.getEnd() == end){
+                if (line.getStart().equals(start) || line.getEnd().equals(end)){
                     line = null;
                 }
             }
         }
 
         public Line longestLine(ArrayList<Line> lineList) {
-             // Sort the list based on the length of the lines
-            //Collections.sort(lineList); the sort is giving an error
 
-             // Return the last element, which is the longest line
+           //Collections.sort(lineList);
             return lineList.get(lineList.size() - 1);
         }
 
@@ -156,7 +173,5 @@ public class Hw1 {
 
             lineList.removeIf(line -> line.getStart().equals(start) || line.getEnd().equals(end));
         }
-
     }
-
 }
