@@ -171,7 +171,11 @@ public class Hw1 {
             start = new Point(0.0, 0.0);
             end = new Point(0.0, 0.0);
 
-            lineList.removeIf(line -> line.getStart().equals(start) || line.getEnd().equals(end));
+            for (Line line: lineList){
+                if (line.getStart().equals(start) || line.getEnd().equals(end)){
+                    lineList.remove(line);
+                }
+            }
         }
     }
 }
