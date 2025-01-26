@@ -36,6 +36,6 @@ public class Children {
 
     @Override
     public String toString(){
-        return "Name: " + this.name + ", Age: " + this.age;
+        return "Name: " + this.getName() + ", Age: " + this.getAge();
     }
 }
