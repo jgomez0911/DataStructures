@@ -2,8 +2,20 @@ package Program1;
 import java.io.*;
 import java.util.*;
 
+/*
+ * @author Jorge Gomez
+ * @date 01/26/25
+ * this is the ChildrenArrayDriver class where there is 5 methods that
+ * test the Children class attributes in the main method.
+ */
+
 public class ChildrenArrayDriver {
 
+/*
+ * method loops through the array and
+ * @returns the avagerage age of the full Children array as an integer
+ * @param children array of Children object,
+ */
     public static int overallAvg(Children[] a){
         int sum = 0;
         int count = 0;
@@ -14,6 +26,13 @@ public class ChildrenArrayDriver {
         return sum/count;
     }
 
+/*
+ * method loops through the array and determines if the object values
+ * match the array values and counts how many match
+ * @param children array of Children object and other children object
+ * @returns the count of how many Children objects equal the same value
+ * of the Children array
+ */
     public static int count( Children[] a, Children o ){
         int count = 0;
         for (Children child : a){
@@ -24,9 +43,12 @@ public class ChildrenArrayDriver {
         return count;
     }
 
-    //Returns the average of the Integer attributes of Childrens with String attribute equal to
-    //the input string. For example, groupAvg(itemArr,"abc") returns the average of the
-    //Integer attributes for all objects with String attribute equal to abc.
+/*
+ * method seaches for a string in the Children object array and gets the average age withing the search
+ * @param children array of Children object and the string to search for
+ * @Returns the average of the Integer attributes of Childrens with String attribute equal to
+ * the input string.
+*/
     public static int groupAvg(Children[] a, String s){
         int sum =0;
         int count = 0;
@@ -39,9 +61,11 @@ public class ChildrenArrayDriver {
         return sum / count;
     }
 
-    //Returns an array of <Item> objects that contains all objects with Integer attribute less than the
-    //input Integer. For example, lessThan(itemArr, 50) returns an array of items with
-    //Integer attribute < 50.
+/*
+ * method searches the Children array for all interger values less then integer given and returns new array
+ * @param children array of Children object and integer value
+ * @Returns an array of Children objects.
+ */
     public static Children[] lessThan(Children[] c, Integer A ){
         Children[] newArr = new Children[20];
 
@@ -53,11 +77,10 @@ public class ChildrenArrayDriver {
         }
         return newArr;
     }
-
-    //For each item in the input array with String attribute equal to the input string, the method
-    //edits the <Item>’s Integer attribute by adding n to the Integer value. Thus,
-    //groupEdit(itemArr,"abc",10) adds 10 to the Integer values of each <Item> in
-    //itemArr with String value abc.
+/*
+ * method seaches Children array with given string, and addes given integer to the age of the Children array
+ * @param children array of Children object, string to search for, and integer to add to age
+ */
     public static void groupEdit(Children[] a, String s, Integer n ){
 
         for (Children child: a){
@@ -68,6 +91,12 @@ public class ChildrenArrayDriver {
         }
     }
 
+/*
+ * in this main method an array from the Children class object gets iniates with the size of 20,
+ * there is a scanner class user input and to read a file with the File class.
+ * it loops through the text file to retreive the name and age informatino to creat the Children class, then prints both attributes.
+ * it then calls each method from the ChildrenArrayDriver class to test the methods.
+ */
     public static void main(String[] args) throws FileNotFoundException {
 
         Children[] childrenArr = new Children[20];

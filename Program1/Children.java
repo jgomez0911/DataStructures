@@ -1,15 +1,22 @@
 package Program1;
 
-public class Children {
 
+/*
+ * @author Jorge Gomez
+ * @date 01/26/25
+ * this is the Children class with string name and integer age attributies 
+ */
+
+public class Children {
+    // private fields
     private String name;
     private int age;
-
+    // constructor
     public Children(){
         this.name = "";
         this.age = 0;
     }
-
+    //constructor with parameters
     public Children(String name, int age){
         this.name = name;
         this.age = age;
@@ -29,11 +36,11 @@ public class Children {
     public void setAge(int age){
         this.age = age;
     }
-
+    // boolean
     public boolean equals(Children o){
         return this.name.equalsIgnoreCase(o.getName()) && this.age == o.getAge();
     }
-
+    // override array to string print out
     @Override
     public String toString(){
         return "Name: " + this.getName() + ", Age: " + this.getAge();
