@@ -18,6 +18,19 @@ public class Hw2 {
             //this method should be implemented in the subclass
             throw new UnsupportedOperationException();
         }
+
+        public String compareTo(Shape other) {
+            double result = Double.compare(this.getArea(), other.getArea());
+            if (result == 0){
+                return "Both shapes have the same area";
+            }
+            else if (result < 0){
+                return "This shape has a smaller area than the other shape";
+            }
+            else {
+                return "This shape has a larger area than the other shape";
+            }
+        }
     }
 
     public class Circle extends Shape{
@@ -75,4 +88,26 @@ public class Hw2 {
 
     }
 
+    public class shapeTest{
+        public static void main(String[] args) {
+
+            Shape[] myShapes = new Shape[4];
+            myShapes[0] = new Circle("red", 5);
+            myShapes[1] = new Rectangle("blue", 4, 5);
+            myShapes[2] = new Circle("green", 3);
+            myShapes[3] = new Rectangle("yellow", 6, 7);
+
+            System.out.println(findLargestShape(myShapes).toString());
+        }
+
+        public static Shape findLargestShape( Shape[] myShapes ){
+            Shape largestShape = myShapes[0];
+            for (int i = 0; i < myShapes.length; i++) {
+                if (myShapes[i].getArea() > largestShape.getArea()) {
+                    largestShape = myShapes[i];
+                }
+            }
+            return largestShape;
+        }
+    }
 }
