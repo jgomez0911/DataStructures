@@ -13,12 +13,14 @@ public class GrandChildren extends Children{
         this.generation = g;
     }
 
-    public boolean equals(GrandChildren g){
-        if (this.equals(g)){
-            return this.generation == g.generation;
-        }
-        return false;
+    @Override
+    public boolean equals(Object obj) {
+        if (!super.equals(obj)) return false; // Check base class equality
+        if (!(obj instanceof GrandChildren)) return false;
+        GrandChildren other = (GrandChildren) obj;
+        return this.generation == other.generation;
     }
+
 
     @Override
     public String toString(){

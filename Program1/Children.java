@@ -36,8 +36,12 @@ package Program1;
         this.age = age;
     }
     // boolean
-    public boolean equals(Children o){
-        return this.name.equalsIgnoreCase(o.getName()) && this.age == o.getAge();
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof Children)) return false;
+        Children other = (Children) obj;
+        return this.name.equals(other.name) && this.age == other.age;
     }
     // override array to string print out
     @Override
