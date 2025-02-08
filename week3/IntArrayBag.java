@@ -2,7 +2,9 @@
 // Additional javadoc documentation is available from the IntArrayBag link in:
 //   http://www.cs.colorado.edu/~main/docs
 
-package edu.colorado.collections;
+//package edu.colorado.collections;
+
+import java.util.Arrays;
 
 /******************************************************************************
 * An IntArrayBag is a collection of int numbers.
@@ -43,7 +45,7 @@ public class IntArrayBag implements Cloneable
    //      manyItems, which is no more than data.length.
    //   2. For an empty bag, we do not care what is stored in any of data;
    //      for a non-empty bag, the elements in the bag are stored in data[0]
-   //      through data[manyItems-1], and we don’t care what’s in the
+   //      through data[manyItems-1], and we donï¿½t care whatï¿½s in the
    //      rest of data.
    private int[ ] data;
    private int manyItems; 
@@ -64,7 +66,6 @@ public class IntArrayBag implements Cloneable
       manyItems = 0;
       data = new int[INITIAL_CAPACITY];
    }
-     
 
    /**
    * Initialize an empty bag with a specified initial capacity. Note that the
@@ -366,6 +367,29 @@ public class IntArrayBag implements Cloneable
       
       return answer;
    }
-      
+
+   public void replace(int oldVal, Integer newVal) {
+
+      for (int i = 0; i < manyItems; i++) {
+          if (data[i] == oldVal) {
+              data[i] = newVal;
+          }
+      }
+  }
+
+  public boolean sameAs(IntArrayBag bagA) {
+        // If the sizes are different, the bags cannot be the same
+        if (this.manyItems != bagA.manyItems) {
+            return false;
+        }
+
+        int[] thisDataCopy = Arrays.copyOf(this.data, this.manyItems);
+        int[] bagADataCopy = Arrays.copyOf(bagA.data, bagA.manyItems);
+
+        Arrays.sort(thisDataCopy);
+        Arrays.sort(bagADataCopy);
+
+        return Arrays.equals(thisDataCopy, bagADataCopy);
+    }
+
 }
-           

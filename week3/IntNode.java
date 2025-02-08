@@ -2,24 +2,24 @@
 // Complete documentation is available from the IntNode link in:
 //   http://www.cs.colorado.edu/~main/docs
 
-package edu.colorado.nodes;
+//package edu.colorado.nodes;
 
 /******************************************************************************
-* An IntNode provides a node for a linked list with 
+* An IntNode provides a node for a linked list with
 * integer data in each node.
 *
 * @note
 *   Lists of nodes can be made of any length, limited only by the amount of
 *   free memory in the heap. But beyond Integer.MAX_VALUE (2,147,483,647),
 *   the answer from listLength is incorrect because of arithmetic
-*   overflow. 
+*   overflow.
 *
 * @see
 *   <A HREF="../../../../edu/colorado/nodes/IntNode.java">
 *   Java Source Code for this class
 *   (www.cs.colorado.edu/~main/edu/colorado/nodes/IntNode.java)</A>
 *
-* @author Michael Main 
+* @author Michael Main
 *   <A HREF="mailto:main@colorado.edu"> (main@colorado.edu) </A>
 *
 * @version Feb 10, 2016
@@ -41,12 +41,12 @@ public class IntNode
    //      Otherwise, the link part is a reference to the
    //      next node of the list.
    private int data;
-   private IntNode link;   
+   private IntNode link;
 
 
    /**
    * Initialize a node with a specified initial data and link to the next
-   * node. Note that the initialLink may be the null reference, 
+   * node. Note that the initialLink may be the null reference,
    * which indicates that the new node has nothing after it.
    * @param initialData
    *   the initial data of this new node
@@ -55,7 +55,7 @@ public class IntNode
    *   to indicate that there is no node after this new node.
    * @postcondition
    *   This node contains the specified data and link to the next node.
-   **/   
+   **/
    public IntNode(int initialData, IntNode initialLink)
    {
       data = initialData;
@@ -64,7 +64,7 @@ public class IntNode
 
 
    /**
-   * Modification method to add a new node after this node.   
+   * Modification method to add a new node after this node.
    * @param item
    *   the data to place in the new node
    * @postcondition
@@ -72,63 +72,60 @@ public class IntNode
    *   The data for the new node is item. Any other nodes
    *   that used to be after this node are now after the new node.
    * @exception OutOfMemoryError
-   *   Indicates that there is insufficient memory for a new 
-   *   IntNode. 
+   *   Indicates that there is insufficient memory for a new
+   *   IntNode.
    **/
-   public void addNodeAfter(int item)   
+   public void addNodeAfter(int item)
    {
       link = new IntNode(item, link);
-   }          
-   
-   
+   }
+
    /**
-   * Accessor method to get the data from this node.   
+   * Accessor method to get the data from this node.
    * @return
    *   the data from this node
    **/
-   public int getData( )   
+   public int getData( )
    {
       return data;
    }
-   
-   
+
    /**
-   * Accessor method to get a reference to the next node after this node. 
+   * Accessor method to get a reference to the next node after this node.
    * @return
    *   a reference to the node after this node (or the null reference if there
    *   is nothing after this node)
    **/
    public IntNode getLink( )
    {
-      return link;                                               
-   } 
-    
-    
+      return link;
+   }
+
    /**
    * Copy a list.
    * @param source
    *   the head of a linked list that will be copied (which may be
    *   an empty list in where source is null)
    * @return
-   *   The method has made a copy of the linked list starting at 
+   *   The method has made a copy of the linked list starting at
    *   source. The return value is the head reference for the
-   *   copy. 
+   *   copy.
    * @exception OutOfMemoryError
-   *   Indicates that there is insufficient memory for the new list.   
-   **/ 
+   *   Indicates that there is insufficient memory for the new list.
+   **/
    public static IntNode listCopy(IntNode source)
    {
       IntNode copyHead;
       IntNode copyTail;
-      
+
       // Handle the special case of the empty list.
       if (source == null)
          return null;
-         
+
       // Make the first node for the newly created list.
       copyHead = new IntNode(source.data, null);
       copyTail = copyHead;
-      
+
       // Make the rest of the nodes for the newly created list.
       while (source.link != null)
       {
@@ -136,39 +133,38 @@ public class IntNode
          copyTail.addNodeAfter(source.data);
          copyTail = copyTail.link;
       }
- 
+
       // Return the head reference for the new list.
       return copyHead;
    }
-   
-   
+
    /**
    * Copy a list, returning both a head and tail reference for the copy.
    * @param source
    *   the head of a linked list that will be copied (which may be
    *   an empty list in where source is null)
    * @return
-   *   The method has made a copy of the linked list starting at 
+   *   The method has made a copy of the linked list starting at
    *   source.  The return value is an
    *   array where the [0] element is a head reference for the copy and the [1]
    *   element is a tail reference for the copy.
    * @exception OutOfMemoryError
-   *   Indicates that there is insufficient memory for the new list.   
+   *   Indicates that there is insufficient memory for the new list.
    **/
    public static IntNode[ ] listCopyWithTail(IntNode source)
    {
       IntNode copyHead;
       IntNode copyTail;
       IntNode[ ] answer = new IntNode[2];
-     
-      // Handle the special case of the empty list.   
+
+      // Handle the special case of the empty list.
       if (source == null)
          return answer; // The answer has two null references .
-      
+
       // Make the first node for the newly created list.
       copyHead = new IntNode(source.data, null);
       copyTail = copyHead;
-      
+
       // Make the rest of the nodes for the newly created list.
       while (source.link != null)
       {
@@ -176,36 +172,32 @@ public class IntNode
          copyTail.addNodeAfter(source.data);
          copyTail = copyTail.link;
       }
-      
       // Return the head and tail references.
       answer[0] = copyHead;
       answer[1] = copyTail;
       return answer;
    }
-   
-   
+
    /**
    * Compute the number of nodes in a linked list.
    * @param head
    *   the head reference for a linked list (which may be an empty list
    *   with a null head)
    * @return
-   *   the number of nodes in the list with the given head 
+   *   the number of nodes in the list with the given head
    * @note
-   *   A wrong answer occurs for lists longer than Int.MAX_VALUE.     
-   **/   
+   *   A wrong answer occurs for lists longer than Int.MAX_VALUE.
+   **/
    public static int listLength(IntNode head)
    {
       IntNode cursor;
       int answer;
-      
+
       answer = 0;
       for (cursor = head; cursor != null; cursor = cursor.link)
          answer++;
-        
       return answer;
    }
-   
 
    /**
    * Copy part of a list, providing a head and tail reference for the new copy. 
@@ -216,7 +208,7 @@ public class IntNode
    * @precondition
    *   start and end are non-null references to nodes
    *   on the same linked list,
-   *   with the start node at or before the end node. 
+   *   with the start node at or before the end node.
    * @return
    *   The method has made a copy of the part of a linked list, from the
    *   specified start node to the specified end node. The return value is an
@@ -228,21 +220,21 @@ public class IntNode
    * @exception NullPointerException
    *   Indicates that start is null.
    * @exception OutOfMemoryError
-   *   Indicates that there is insufficient memory for the new list.    
-   **/   
+   *   Indicates that there is insufficient memory for the new list.
+   **/
    public static IntNode[ ] listPart(IntNode start, IntNode end)
    {
       IntNode copyHead;
       IntNode copyTail;
       IntNode cursor;
       IntNode[ ] answer = new IntNode[2];
-      
+
       // Make the first node for the newly created list. Notice that this will
       // cause a NullPointerException if start is null.
       copyHead = new IntNode(start.data, null);
       copyTail = copyHead;
       cursor = start;
-      
+
       // Make the rest of the nodes for the newly created list.
       while (cursor != end)
       {
@@ -253,14 +245,12 @@ public class IntNode
          copyTail.addNodeAfter(cursor.data);
          copyTail = copyTail.link;
       }
-      
+
       // Return the head and tail references
       answer[0] = copyHead;
       answer[1] = copyTail;
       return answer;
-   }        
-   
-   
+   }
    /**
    * Find a node at a specified position in a linked list.
    * @param head
@@ -276,16 +266,16 @@ public class IntNode
    *   so on.) If there is no such position (because the list is too short),
    *   then the null reference is returned.
    * @exception IllegalArgumentException
-   *   Indicates that position is not positive.    
-   **/   
+   *   Indicates that position is not positive.
+   **/
    public static IntNode listPosition(IntNode head, int position)
    {
       IntNode cursor;
       int i;
-      
+
       if (position <= 0)
            throw new IllegalArgumentException("position is not positive");
-      
+
       cursor = head;
       for (i = 1; (i < position) && (cursor != null); i++)
          cursor = cursor.link;
@@ -303,23 +293,23 @@ public class IntNode
    *   a piece of data to search for
    * @return
    *   The return value is a reference to the first node that contains the
-   *   specified target. If there is no such node, the null reference is 
-   *   returned.     
-   **/   
+   *   specified target. If there is no such node, the null reference is
+   *   returned.
+   **/
    public static IntNode listSearch(IntNode head, int target)
    {
       IntNode cursor;
-      
+
       for (cursor = head; cursor != null; cursor = cursor.link)
          if (target == cursor.data)
             return cursor;
-        
+
       return null;
    }
 
-   
+
    /**
-   * Modification method to remove the node after this node.   
+   * Modification method to remove the node after this node.
    * @precondition
    *   This node must not be the tail node of the list.
    * @postcondition
@@ -330,25 +320,23 @@ public class IntNode
    *   Indicates that this was the tail node of the list, so there is nothing
    *   after it to remove.
    **/
-   public void removeNodeAfter( )   
+   public void removeNodeAfter( )
    {
       link = link.link;
-   }          
-   
-   
+   }
+
    /**
-   * Modification method to set the data in this node.   
+   * Modification method to set the data in this node.
    * @param newData
    *   the new data to place in this node
    * @postcondition
    *   The data of this node has been set to newData.
    **/
-   public void setData(int newData)   
+   public void setData(int newData)
    {
       data = newData;
-   }                                                               
-   
-   
+   }
+
    /**
    * Modification method to set the link to the next node after this node.
    * @param newLink
@@ -360,8 +348,7 @@ public class IntNode
    *   this node.
    **/
    public void setLink(IntNode newLink)
-   {                    
+   {
       link = newLink;
    }
 }
-           

@@ -2,8 +2,8 @@
 // Complete documentation is available from the IntLinkedBag link in:
 //   http://www.cs.colorado.edu/~main/docs
 
-package edu.colorado.collections;
-import edu.colorado.nodes.IntNode; 
+//package edu.colorado.collections;
+//import edu.colorado.nodes.IntNode; 
 
 /******************************************************************************
 * An IntLinkedBag is a collection of int numbers.
@@ -227,13 +227,12 @@ public class IntLinkedBag implements Cloneable
          return true;
       }
    }
-    
-      
+
    /**
    * Determine the number of elements in this bag.
    * @return
    *   the number of elements in this bag
-   **/                           
+   **/
    public int size( )
    {
       return manyNodes;
@@ -265,6 +264,39 @@ public class IntLinkedBag implements Cloneable
       answer.addAll(b2);     
       return answer;
    }
-      
+
+   public void replace(int oldVal, Integer newVal) {
+      IntNode current = head;
+
+      while (current != null) {
+
+         if (current.getData() == oldVal) {
+            current.setData(newVal); 
+         }
+         current = current.getLink(); 
+      }
+  }
+
+  public boolean sameAs(IntLinkedBag bagL) {
+
+   if (this.manyNodes != bagL.manyNodes) {
+      return false;
+   }
+
+   IntNode current = this.head;
+
+   while (current != null) {
+
+      int thisBag = this.countOccurrences(current.getData());
+      int otherBag = bagL.countOccurrences(current.getData());
+
+      if (thisBag != otherBag) {
+         return false;
+      }
+
+      current = current.getLink();
+   }
+
+   return true;
+   }
 }
-           
