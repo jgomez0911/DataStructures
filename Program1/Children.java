@@ -43,16 +43,28 @@ package Program1;
         Children other = (Children) obj;
         return this.name.equals(other.name) && this.age == other.age;
     }
+
+    @Override
+    public int hashCode() {
+        int result = 17; // Start with a non-zero constant
+        result = 31 * result + (name != null ? name.hashCode() : 0); // Include the name field
+        result = 31 * result + age; // Include the age field
+        return result;
+    }
+
     // override array to string print out
     @Override
     public String toString(){
-        return "Child name: " + this.getName() + ", Age: " + this.getAge();
+        return String.format("Name:  %-8s Age: %-2d", name, age);
     }
     @Override
     public int compareTo(Children o) {
-        if (this.age != o.age){
-            return Integer.compare(this.age, o.age);
+        // First compare by name
+        int nameComparison = this.name.compareToIgnoreCase(o.name);
+        if (nameComparison != 0) {
+            return nameComparison; // If names are different, return the comparison result
         }
-        return this.name.compareToIgnoreCase(o.name);
+        // If names are the same, compare by age
+        return Integer.compare(this.age, o.age);
     }
 }

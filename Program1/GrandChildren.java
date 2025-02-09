@@ -1,16 +1,16 @@
 package Program1;
 
-public class GrandChildren extends Children{
-    private String name = "";
-    private int age = 0;
-    private int generation = 0;
+public class GrandChildren extends Children {
+    private int generation;
 
-    public GrandChildren(){}
+    public GrandChildren(String name, int age, int generation) {
+        super(name, age); // Call the constructor of the Children class
+        this.generation = generation; // Initialize the final field
+    }
 
-    public GrandChildren(String s, int age, int g){
-        this.name = s;
-        this.age = age;
-        this.generation = g;
+    @Override
+    public String toString() {
+        return String.format("Name:  %-8s Age: %-2d  Generation: %-5d",this.getName(),this.getAge(),generation);
     }
 
     @Override
@@ -18,12 +18,13 @@ public class GrandChildren extends Children{
         if (!super.equals(obj)) return false; // Check base class equality
         if (!(obj instanceof GrandChildren)) return false;
         GrandChildren other = (GrandChildren) obj;
-        return this.generation == other.generation;
+        return this.generation == other.generation; // Compare generation field
     }
 
-
     @Override
-    public String toString(){
-        return "GrandChildren name= " + name +", age=" + age +", generation= " + generation;
+    public int hashCode() {
+        int result = super.hashCode(); // Get the hash code from the parent class
+        result = 31 * result + generation; // Include the generation field
+        return result;
     }
 }
