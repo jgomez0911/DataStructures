@@ -28,20 +28,22 @@ public class ChildrenDriver {
         }
 
         // Print the list
-        System.out.println("Contents of the ChildrenSortedArraySet:");
-        System.out.println(childrenSet.toString());
+        //System.out.println("Contents of the ChildrenSortedArraySet:");
+        //System.out.println(childrenSet.toString());
 
         // Test indexOf method
-        testIndexOf(childrenSet);
+        //testIndexOf(childrenSet);
 
         // Test remove method
-        testRemove(childrenSet);
+        //testRemove(childrenSet);
 
         // Test grab method
-        testGrab(childrenSet);
+        //testGrab(childrenSet);
 
         // Test categorySet method
-        testCategorySet(childrenSet);
+        System.out.println(childrenSet.categorySet(1));
+        childrenSet.categorySet(2);
+        childrenSet.categorySet(3);
 
         scanner.close();
     }
@@ -77,13 +79,13 @@ public class ChildrenDriver {
                 }
                 return new GrandChildren(name, age, generation); // Assuming GrandChildren has a constructor with name, age, and generation
             case 3:
-                boolean isActive = parts.length == 4 && Boolean.parseBoolean(parts[3]);
-                return new Nephew(name, age, isActive); // Assuming Nephew has a constructor with name, age, and isActive
+                boolean male = parts.length == 4 && Boolean.parseBoolean(parts[3]);
+                return new Nephew(name, age, male); // Assuming Nephew has a constructor with name, age, and male
             default:
                 return null; // Invalid type
         }
     }
-
+/*
     private static void testIndexOf(ChildrenSortedArraySet childrenSet) {
         System.out.println("\nTesting indexOf method:");
         System.out.println("Index of Children (Vania, 31) -> " + childrenSet.indexOf(new Children("Vania", 31))); // Should return the index
@@ -118,4 +120,5 @@ public class ChildrenDriver {
         ChildrenSortedArraySet nephewCategorySet = childrenSet.categorySet(3);
         System.out.println("Category set for type 3 (Nephew): " + nephewCategorySet.toString()); // Should return all Nephews
     }
+    */
 }

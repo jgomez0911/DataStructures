@@ -15,7 +15,7 @@ public class Nephew extends Children{
 
     @Override
     public String toString(){
-        return "Niephew" + " name='" + name + ", age=" + age + ", male=" + male;
+        return "Nephew name= " + name + ", age=" + age + ", male=" + male;
     }
 
     @Override

@@ -19,7 +19,7 @@ public class ChildrenSortedArraySet {
     class to decide on how to sort items or how to test the equality. 
     Sorting and equality depend merely on the semantics of your <Item> 
     class. Moreover, according to compareTo, the items will be sorted either 
-    in ascending or descending order. 
+    in ascending or descending order.
     You are not allowed to use the java Arrays.sort method. */
     public void insert(Children child) {
         if (child == null) {
@@ -85,12 +85,12 @@ public class ChildrenSortedArraySet {
         return -1; // Not found
     }
 
-    /*Search the collection for an Item that equals the 
-    input <Item> and, if found, remove this <Item> from 
-    the set. Return true if the <Item> is removed and false 
-    otherwise. This method must maintain the sorted order.  
-    Shift the array elements down to fill the gap that is 
-    created by the deleted <Item>. . Do not use the Java's 
+    /*Search the collection for an Item that equals the
+    input <Item> and, if found, remove this <Item> from
+    the set. Return true if the <Item> is removed and false
+    otherwise. This method must maintain the sorted order.
+    Shift the array elements down to fill the gap that is
+    created by the deleted <Item>. . Do not use the Java's
     Arrays.sort(…) method. */
     public Boolean remove(Children child){
         int index = indexOf(child);
@@ -105,9 +105,9 @@ public class ChildrenSortedArraySet {
         return true;
     }
 
-    /*Just replacing the deleted item with the last element 
-    in the array will not work anymore because this may break 
-    the sorted order Return the <Item> that is stored at position 
+    /*Just replacing the deleted item with the last element
+    in the array will not work anymore because this may break
+    the sorted order Return the <Item> that is stored at position
     index in the set or null if index is beyond the size of the
     collection. Do not delete the element from the set. */
     public Children grab(int index){
@@ -132,8 +132,8 @@ public class ChildrenSortedArraySet {
         ChildrenSortedArraySet resultSet = new ChildrenSortedArraySet(max);
         for (int i = 0; i < max; i++) {
             if (childrenAry[i] != null) {
-                if (type == 1 && childrenAry[i] instanceof Children && !(childrenAry[i] instanceof GrandChildren)) {
-                    resultSet.insert(childrenAry[i]); // Insert only Children, not GrandChildren
+                if (type == 1 && childrenAry[i] instanceof Children) {
+                    resultSet.insert(childrenAry[i]); // Insert only Children
                 } else if (type == 2 && childrenAry[i] instanceof GrandChildren) {
                     resultSet.insert(childrenAry[i]); // Insert only GrandChildren
                 } else if (type == 3 && childrenAry[i] instanceof Nephew) {

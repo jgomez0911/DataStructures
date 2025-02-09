@@ -24,6 +24,6 @@ public class GrandChildren extends Children{
 
     @Override
     public String toString(){
-        return "GrandChildren" +" name= " + name +", age=" + age +", generation= " + generation;
+        return "GrandChildren name= " + name +", age=" + age +", generation= " + generation;
     }
 }

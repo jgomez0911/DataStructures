@@ -46,7 +46,7 @@ package Program1;
     // override array to string print out
     @Override
     public String toString(){
-        return "Name: " + this.getName() + ", Age: " + this.getAge();
+        return "Child name: " + this.getName() + ", Age: " + this.getAge();
     }
     @Override
     public int compareTo(Children o) {
