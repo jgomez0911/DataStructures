@@ -4,19 +4,25 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+/**
+ * The ChildrenDriver class is responsible for reading data from a file,
+ * populating a ChildrenSortedArraySet with Children, GrandChildren, and Nephew objects,
+ * and testing the functionality of the set.
+ * Author: Jorge Gomez
+ * Date: 02/09/25
+ */
 public class ChildrenDriver {
 
     public static void main(String[] args) {
-
+        // Create a ChildrenSortedArraySet with a maximum size of 25
         ChildrenSortedArraySet childrenSet = new ChildrenSortedArraySet(25); // Assuming a max size of 100
 
         // Read the file and populate the ChildrenSortedArraySet
         try {
             Scanner sc = new Scanner(System.in);
-            System.out.print("Enter the name of the data file (e.g., info.txt): ");
-            //String file = sc.nextLine();
-            File f = new File("info.txt");
-            System.err.println();
+            System.out.print("Enter the name file (info.txt): ");
+            String file = sc.nextLine();
+            File f = new File(file);
             Scanner read = new Scanner(f);
             while (read.hasNextLine()) {
                 String line = read.nextLine();
@@ -59,11 +65,12 @@ public class ChildrenDriver {
 
         // Testing
 
+        // Print all children in the set
         for(int i=0;i<childrenSet.size();i++){
             System.out.println(childrenSet.grab(i));
         }
 
-        // Grab
+        // Grab specific children by index
         System.out.println(childrenSet.grab(0)); // ben age 1 male ture
         System.out.println(childrenSet.grab(1)); // oliva age 2 generation 2
 

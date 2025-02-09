@@ -1,16 +1,33 @@
 package Program1;
 
+/**
+ * Represents a sorted set of Children objects.
+ * This class allows for insertion, removal, and retrieval of Children objects,
+ * while maintaining a sorted order based on the age and name of the children.
+ * Author: Jorge Gomez
+ * Date: 02/09/25
+ */
+
 public class ChildrenSortedArraySet {
 
     private Children[] childrenAry;
     private Integer max;
 
+    /**
+     * Constructs a ChildrenSortedArraySet with the specified maximum size.
+     * @param max the maximum number of Children objects that can be stored in the set
+     */
     public ChildrenSortedArraySet(Integer max) {
         this.max = max;
         this.childrenAry = new Children[max];
     }
 
-    // Inserts an object of type Children in the set
+    /**
+     * Inserts a Children object into the set.
+     * If the object is null or a duplicate, it will not be inserted.
+     * @param child the Children object to insert
+     * @throws NullPointerException if the child is null
+     */
     public void insert(Children child) {
         if (child == null) {
             throw new NullPointerException("Cannot insert null into the set");
@@ -35,7 +52,10 @@ public class ChildrenSortedArraySet {
         }
     }
 
-    // Returns the number of items in the collection
+    /**
+     * Returns the number of Children objects currently in the set.
+     * @return the number of items in the collection
+     */
     public int size() {
         int count = 0;
         for (Children child : childrenAry) {
@@ -46,7 +66,10 @@ public class ChildrenSortedArraySet {
         return count;
     }
 
-    // Returns a string representation of the collection
+    /**
+     * Returns a string representation of the collection of Children objects.
+     * @return a string representation of the ChildrenSortedArraySet
+     */
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder("[\n");
@@ -59,7 +82,11 @@ public class ChildrenSortedArraySet {
         return result.toString();
     }
 
-    // Returns the index of the input Children or -1 if not found
+    /**
+     * Returns the index of the specified Children object, or -1 if not found.
+     * @param child the Children object to find
+     * @return the index of the child, or -1 if not found
+     */
     public int indexOf(Children child) {
         for (int i = 0; i < max; i++) {
             if (childrenAry[i] != null && childrenAry[i].equals(child)) {
@@ -69,7 +96,11 @@ public class ChildrenSortedArraySet {
         return -1; // Not found
     }
 
-    // Removes the specified Children from the set
+    /**
+     * Removes the specified Children object from the set.
+     * @param child the Children object to remove
+     * @return true if the child was successfully removed, false if not found
+     */
     public Boolean remove(Children child) {
         int index = indexOf(child);
         if (index == -1) {
@@ -83,7 +114,11 @@ public class ChildrenSortedArraySet {
         return true;
     }
 
-    // Returns the Children at the specified index or null if out of bounds
+    /**
+     * Returns the Children object at the specified index, or null if out of bounds.
+     * @param index the index of the Children object to retrieve
+     * @return the Children object at the specified index, or null if out of bounds
+     */
     public Children grab(int index) {
         if (index < 0 || index >= max) {
             return null; // Index out of bounds
@@ -91,7 +126,11 @@ public class ChildrenSortedArraySet {
         return childrenAry[index];
     }
 
-    // Returns a ChildrenSortedArraySet that contains only specific subitem types
+    /**
+     * Returns a new ChildrenSortedArraySet containing only specific subitem types.
+     * @param type the type of children to include (1 for Children, 2 for GrandChildren, 3 for Nephew)
+     * @return a new ChildrenSortedArraySet containing the specified types, or null if the type is invalid
+     */
     public ChildrenSortedArraySet categorySet(int type) {
         if (type < 1 || type > 3) {
             return null; // Invalid type
@@ -105,7 +144,7 @@ public class ChildrenSortedArraySet {
                 } else if (type == 2 && child instanceof GrandChildren) {
                     resultSet.insert(child); // Insert only GrandChildren
                 } else if (type == 3 && child instanceof Nephew) {
-                    resultSet.insert(child); // Insert only r Nephew
+                    resultSet.insert(child); // Insert only Nephew
                 }
             }
         }
