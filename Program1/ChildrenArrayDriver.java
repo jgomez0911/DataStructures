@@ -1,4 +1,3 @@
-package Program1;
 import java.io.*;
 import java.util.*;
 
@@ -72,7 +71,7 @@ public class ChildrenArrayDriver {
         for (int i=0; i<c.length;i++){
             if (c[i].getAge() < A){
                 newArr[i] = c[i];
-               System.out.println(newArr[i].toString());
+                System.out.println(c[i].toString());
             }
         }
         return newArr;
@@ -121,10 +120,10 @@ public class ChildrenArrayDriver {
             System.out.println(child.getName() + " " + child.getAge());
         }
 
-        System.out.println(overallAvg(childrenArr));
-        System.out.println(groupAvg(childrenArr, "olivia"));
-        lessThan(childrenArr, 25);
-        groupEdit(childrenArr,"jorge",1 );
+        System.out.println(overallAvg(childrenArr)); // return 18
+        System.out.println(groupAvg(childrenArr, "olivia")); // returns 2
+        lessThan(childrenArr, 25); // returns every children under 25
+        groupEdit(childrenArr,"jorge",1 ); // returns jorge 30
 
         sc.close();
         read.close();
