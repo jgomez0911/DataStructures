@@ -58,6 +58,32 @@ public class HW5 {
     }
     //Big-O running time of method6 is O(log n)
 
+    public class ThingNode {
+        Thing data;
+        ThingNode next;
 
+        public Thing getData() { return data; }
+        public ThingNode getNext() { return next; }
 
+        public void setData( E data ) { this.data = data; }
+        public void setNext ( ThingNode next ) { this.next = next; }
+
+        public Thing removeSecond(Thing target, ThingNode head){
+
+            if (head == null || head.getNext() == null){
+                return null;
+            }
+
+            ThingNode first = head;
+            ThingNode second = head.getNext();
+            ThingNode third = second.getNext();
+
+            Thing removed = second.getData();
+
+            first.setNext(third);
+            second.setNext(null);
+
+            return removed;
+        }
+    }
 }
