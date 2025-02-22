@@ -1,4 +1,4 @@
-package Program1;
+package Program2;
 
 import java.io.File;
 import java.io.FileNotFoundException;

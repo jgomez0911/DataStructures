@@ -1,4 +1,4 @@
-package Program1;
+package Program2;
 
 /*
  * @author Jorge Gomez
