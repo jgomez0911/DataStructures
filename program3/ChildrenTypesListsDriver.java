@@ -10,7 +10,7 @@ public class ChildrenTypesListsDriver {
         ChildrenTypesLists childrenTypesLists = new ChildrenTypesLists();
 
         // Read data from the input file
-        String fileName = "input.txt"; // Change this to your input file path
+        String fileName = "./program3/info.tx"; // Change this to your input file path
         try (Scanner scanner = new Scanner(new File(fileName))) {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
