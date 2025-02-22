@@ -1,20 +1,20 @@
 1   Vania   31
 1   Jorge   29
-1   Jamie   29
-1   Jesus   29
+2   Jamie   29
+2   Jesus   29
 1   Brenda  27
 1   Getzi   29
-2   Daniel  6   1
-2   Liliana 4   2
+1   Daniel  6   1
+1   Liliana 4   2
 2   Olivia  2   2
-2   Jordi   9   1
-2   Sofi    5   2
+1   Jordi   9   1
+1   Sofi    5   2
 2   Andy    10  1
 2   Adriel  7   2
-3   Martin  28  true
-3   Mirriam 32  false
-3   Anthony 31  true
-3   Leticia 30  false
-3   Olivia  3   false
-3   Ben 1   true
-3   Lorena  27  false
+2   Martin  28  true
+1   Mirriam 32  false
+2   Anthony 31  true
+1   Leticia 30  false
+2   Olivia  3   false
+2   Ben 1   true
+2   Lorena  27  false

@@ -57,7 +57,7 @@ public class HW5 {
         }
     }
     //Big-O running time of method6 is O(log n)
-
+/* 
     public class ThingNode {
         Thing data;
         ThingNode next;
@@ -86,4 +86,5 @@ public class HW5 {
             return removed;
         }
     }
+    */
 }

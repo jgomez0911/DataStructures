@@ -10,7 +10,7 @@ public class ChildrenTypesListsDriver {
         ChildrenTypesLists childrenTypesLists = new ChildrenTypesLists();
 
         // Read data from the input file
-        String fileName = "./program3/info.tx"; // Change this to your input file path
+        String fileName = "program3/info.txt"; // Change this to your input file path
         try (Scanner scanner = new Scanner(new File(fileName))) {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
@@ -20,12 +20,12 @@ public class ChildrenTypesListsDriver {
                 int age = Integer.parseInt(parts[2]);
 
                 if (type == 1) { // GrandChildren
-                    int extraValue = Integer.parseInt(parts[3]); // Assuming this is an integer
-                    GrandChildren grandChild = new GrandChildren(name, age, extraValue);
+                    int generation = Integer.parseInt(parts[3]); // Assuming this is an integer
+                    GrandChildren grandChild = new GrandChildren(name, age, generation);
                     childrenTypesLists.add(grandChild);
                 } else if (type == 2) { // Nephew
-                    boolean isFavorite = Boolean.parseBoolean(parts[3]); // Assuming this is a boolean
-                    Nephew nephew = new Nephew(name, age, isFavorite);
+                    boolean isMale = Boolean.parseBoolean(parts[3]); // Assuming this is a boolean
+                    Nephew nephew = new Nephew(name, age, isMale);
                     childrenTypesLists.add(nephew);
                 }
             }
