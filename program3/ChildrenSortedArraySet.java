@@ -1,4 +1,4 @@
-package Program3;
+package program3;
 
 /**
  * Represents a sorted set of Children objects.
