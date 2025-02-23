@@ -27,7 +27,7 @@ public class Nephew extends Children {
      */
     @Override
     public String toString() {
-        return String.format("Name:  %-8s Age: %-2d  Male:  %-5b",this.getName(),this.getAge(),male);
+        return String.format("%-10s%-4d%-5b",this.getName(),this.getAge(),male);
     }
 
     /**

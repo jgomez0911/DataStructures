@@ -55,7 +55,7 @@ package program3;
     // override array to string print out
     @Override
     public String toString(){
-        return String.format("Name:  %-8s Age: %-2d", name, age);
+        return String.format("%-8s%-2d", name, age);
     }
     @Override
     public int compareTo(Children o) {

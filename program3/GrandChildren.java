@@ -27,7 +27,7 @@ public class GrandChildren extends Children {
      */
     @Override
     public String toString() {
-        return String.format("Name:  %-8s Age: %-2d  Generation: %-5d",this.getName(),this.getAge(),generation);
+        return String.format("%-10s%-4d%-5d",this.getName(),this.getAge(),generation);
     }
 
     /**

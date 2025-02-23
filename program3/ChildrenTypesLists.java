@@ -24,13 +24,13 @@ public class ChildrenTypesLists {
     }
 
     // Method to return the size of the given list
-    public int sizeOf(ChildrenOrderedList iol) {
-        return iol.size();
+    public int sizeOf(ChildrenOrderedList child) {
+        return child.size();
     }
 
     // Method to display the contents of the specified list
-    public void display(ChildrenOrderedList iol) {
-        iol.display();
+    public void display(ChildrenOrderedList child) {
+        child.display();
     }
 
     // Method to add an element at a given index in the correct list
@@ -59,8 +59,8 @@ public class ChildrenTypesLists {
     }
 
     // Method to remove the item located at position index in the specified list
-    public boolean remove(ChildrenOrderedList iol, int index) {
-        return iol.remove(index);
+    public boolean remove(ChildrenOrderedList child, int index) {
+        return child.remove(index);
     }
 
     // Method to return the index of the first occurrence of target in the appropriate list
@@ -76,17 +76,15 @@ public class ChildrenTypesLists {
 
     // Method to return the ChildrenOrderedList of the given type
     public ChildrenOrderedList getList(char type) {
-        if (Character.toLowerCase(type) == 'a') {
-            return grandChildrenList;
-        } else if (Character.toLowerCase(type) == 'b') {
-            return nephewList;
-        } else {
-            return null; // Invalid type
-        }
+        return switch (Character.toLowerCase(type)) {
+            case 'a' -> grandChildrenList;
+            case 'b' -> nephewList;
+            default -> null;
+        }; // Invalid type
     }
 
     // Method to return the item at position index in the specified list
-    public Children get(ChildrenOrderedList iol, int index) {
-        return iol.get(index);
+    public Children get(ChildrenOrderedList child, int index) {
+        return child.get(index);
     }
 }

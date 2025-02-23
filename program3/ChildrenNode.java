@@ -3,7 +3,6 @@ package program3;
 public class ChildrenNode {
 
     private Children myChild;
-
     private ChildrenNode link;
 
     public ChildrenNode(Children i, ChildrenNode n){

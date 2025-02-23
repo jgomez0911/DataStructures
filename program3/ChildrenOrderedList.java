@@ -14,12 +14,31 @@ public class ChildrenOrderedList {
     // Method to add an Item to the end of the list
     public void add(Children element) {
         ChildrenNode newNode = new ChildrenNode(element, null);
-        if (head == null) { // If the list is empty
+
+        // If the list is empty, add the new node as the head and tail
+        if (head == null) {
             head = newNode;
             tail = newNode;
-        } else {
-            tail.setLink(newNode); // Link the new node to the end
-            tail = newNode; // Update the tail
+            return;
+        }
+        // If the new element should be added at the head
+        if (head.getMyChild().compareTo(element) > 0) {
+            newNode.setLink(head);
+            head = newNode;
+            return;
+        }
+        // Traverse the list to find the correct position
+        ChildrenNode current = head;
+        while (current.getLink() != null && current.getLink().getMyChild().compareTo(element) < 0) {
+            current = current.getLink();
+        }
+        // Insert the new node
+        newNode.setLink(current.getLink());
+        current.setLink(newNode);
+
+        // If the new node is added at the end, update the tail
+        if (newNode.getLink() == null) {
+            tail = newNode;
         }
     }
 
@@ -38,7 +57,7 @@ public class ChildrenOrderedList {
     public void display() {
         ChildrenNode current = head;
         while (current != null) {
-            System.out.println(current.getMyChild().toString()); // Assuming Children has a proper toString method
+            System.out.println(current.getMyChild().toString());
             current = current.getLink();
         }
     }
@@ -81,7 +100,6 @@ public class ChildrenOrderedList {
         if (head == null) {
             return false; // List is empty
         }
-
         // Check if the head needs to be removed
         if (head.getMyChild().equals(target)) {
             head = head.getLink();
@@ -90,7 +108,6 @@ public class ChildrenOrderedList {
             }
             return true;
         }
-
         // Traverse the list to find the target
         ChildrenNode current = head;
         while (current.getLink() != null) {
@@ -157,6 +174,6 @@ public class ChildrenOrderedList {
         for (int i = 1; i < index && current != null; i++) {
             current = current.getLink();
         }
-        return (current != null) ? current.getMyChild() : null; // Return the item or null if not found
+        return current == null ? null : current.getMyChild(); // Return the item or null if not found
     }
 }

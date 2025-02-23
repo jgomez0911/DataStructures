@@ -42,7 +42,7 @@ public class ChildrenOrderedListDriver {
         System.out.println("Index of Bob: " + list.indexOf(child2)); // Should return -1
 
         // Test get method
-        System.out.println("Child at index 2: " + list.get(2).getName()); // Assuming getName() method exists
+        System.out.println("Child at index 2: " + list.get(2).getName());
 
         // Test size after removals
         System.out.println("Size of the list after removals: " + list.size());
