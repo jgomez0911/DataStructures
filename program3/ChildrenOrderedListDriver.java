@@ -1,5 +1,11 @@
 package program3;
-
+/**
+ * @author Jorge Gomez
+ * @date 02/22/25
+ * A driver class to test the functionality of the ChildrenOrderedList class.
+ * This class demonstrates adding, removing, and retrieving Children objects
+ * from an ordered linked list.
+ */
 public class ChildrenOrderedListDriver {
     public static void main(String[] args) {
         // Create an instance of ChildrenOrderedList

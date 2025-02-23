@@ -1,17 +1,28 @@
 package program3;
-
+/**
+ * @author Jorge Gomez
+ * @date 02/22/25
+ * Represents an ordered linked list of Children objects.
+ * This class provides methods to add, remove, and retrieve Children objects
+ * while maintaining their order based on the compareTo method.
+ */
 public class ChildrenOrderedList {
 
     private ChildrenNode head; // Reference to the head of the linked list
     private ChildrenNode tail; // Reference to the tail of the linked list
 
-    // Constructor
+    /**
+     * Constructs an empty ChildrenOrderedList.
+     */
     public ChildrenOrderedList() {
         this.head = null;
         this.tail = null;
     }
 
-    // Method to add an Item to the end of the list
+    /**
+     * Adds a Children object to the list in order.
+     * @param element the Children object to be added
+     */
     public void add(Children element) {
         ChildrenNode newNode = new ChildrenNode(element, null);
 
@@ -42,7 +53,10 @@ public class ChildrenOrderedList {
         }
     }
 
-    // Method to return the number of nodes in the list
+    /**
+     * Returns the number of nodes in the list.
+     * @return the size of the list
+     */
     public int size() {
         int count = 0;
         ChildrenNode current = head;
@@ -53,7 +67,10 @@ public class ChildrenOrderedList {
         return count;
     }
 
-    // Method to display the contents of the list
+    /**
+     * Displays the contents of the list.
+     * Each Children object is printed to the console.
+     */
     public void display() {
         ChildrenNode current = head;
         while (current != null) {
@@ -62,7 +79,12 @@ public class ChildrenOrderedList {
         }
     }
 
-    // Method to add an element at a given index
+    /**
+     * Adds a Children object at a specified index in the list.
+     * @param index   the position to add the Children object (1-based index)
+     * @param element the Children object to be added
+     * @return true if the element was added, false if the index is invalid
+     */
     public boolean add(int index, Children element) {
         if (index < 1) {
             return false; // Index must be 1 or greater
@@ -95,7 +117,11 @@ public class ChildrenOrderedList {
         }
     }
 
-    // Method to remove one occurrence of target from the list
+    /**
+     * Removes one occurrence of the specified Children object from the list.
+     * @param target the Children object to be removed
+     * @return true if the object was removed, false if not found
+     */
     public boolean remove(Children target) {
         if (head == null) {
             return false; // List is empty
@@ -123,7 +149,11 @@ public class ChildrenOrderedList {
         return false; // Target not found
     }
 
-    // Method to remove the item located at position index
+    /**
+     * Removes the item located at the specified index in the list.
+     * @param index the position of the item to be removed (1-based index)
+     * @return true if the item was removed, false if the index is invalid
+     */
     public boolean remove(int index) {
         if (index < 1 || head == null) {
             return false; // Invalid index or empty list
@@ -151,7 +181,11 @@ public class ChildrenOrderedList {
         return true;
     }
 
-    // Method to return the index of the first occurrence of target
+    /**
+     * Returns the index of the first occurrence of the specified Children object.
+     * @param target the Children object to find
+     * @return the index of the first occurrence, or -1 if not found
+     */
     public int indexOf(Children target) {
         int index = 1;
         ChildrenNode current = head;
@@ -165,7 +199,11 @@ public class ChildrenOrderedList {
         return -1; // Return -1 if not found
     }
 
-    // Method to return the item at position index
+    /**
+     * Returns the Children object located at the specified index.
+     * @param index the position of the item to retrieve (1-based index)
+     * @return the Children object at the specified index, or null if not found
+     */
     public Children get(int index) {
         if (index < 1) {
             return null; // Invalid index

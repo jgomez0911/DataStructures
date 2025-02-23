@@ -3,7 +3,13 @@ package program3;
 import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
-
+/**
+ * @author Jorge Gomez
+ * @date 02/22/25
+ * A driver class to test the functionality of the ChildrenTypesLists class.
+ * This class reads data from a file and demonstrates adding, removing,
+ * and retrieving GrandChildren and Nephew objects from the appropriate lists.
+ */
 public class ChildrenTypesListsDriver {
     public static void main(String[] args) {
         // Create an instance of ChildrenTypesLists
@@ -12,8 +18,7 @@ public class ChildrenTypesListsDriver {
         // Read data from the input file
         try {
             Scanner sc = new Scanner(System.in);
-            //System.out.print("Enter the name file (info.txt): ");
-            String file = "program3/info.txt"; //sc.nextLine();
+            String file = "program3/info.txt";
             File f = new File(file);
             Scanner read = new Scanner(f);
             while (read.hasNextLine()) {
@@ -36,9 +41,11 @@ public class ChildrenTypesListsDriver {
                     childrenTypesLists.add(nephew);
                 }
             }
+            sc.close();
+            read.close();
         } catch (IOException e) {
             System.err.println("Error reading the file: " + e.getMessage());
-        }catch (ClassCastException e) {
+        } catch (ClassCastException e) {
             System.err.println("Error: " + e.getMessage());
         }
 

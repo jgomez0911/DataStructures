@@ -12,8 +12,8 @@ public class GrandChildren extends Children {
 
     /**
      * Constructs a GrandChildren object with the specified name, age, and generation.
-     * @param name      the name of the grandchild
-     * @param age       the age of the grandchild
+     * @param name the name of the grandchild
+     * @param age  the age of the grandchild
      * @param generation the generation number of the grandchild
      */
     public GrandChildren(String name, int age, int generation) {
