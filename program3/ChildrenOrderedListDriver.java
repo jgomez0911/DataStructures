@@ -1,4 +1,7 @@
-package program3;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 /**
  * @author Jorge Gomez
  * @date 02/22/25
@@ -9,52 +12,56 @@ package program3;
 public class ChildrenOrderedListDriver {
     public static void main(String[] args) {
         // Create an instance of ChildrenOrderedList
-        ChildrenOrderedList list = new ChildrenOrderedList();
+        ChildrenOrderedList childrenList = new ChildrenOrderedList();
 
-        // Create some Children objects (assuming a constructor exists)
-        Children child1 = new Children("Alice", 10);
-        Children child2 = new Children("Bob", 12);
-        Children child3 = new Children("Charlie", 8);
-        Children child4 = new Children("Diana", 11);
+        // Read from the file and populate the list
+        try (Scanner scanner = new Scanner(new File("info.txt"))) {
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                String[] parts = line.split("\\s+");
+                int type = Integer.parseInt(parts[0]); // 1 for GrandChildren, 2 for Nephew
+                String name = parts[1];
+                int age = Integer.parseInt(parts[2]);
 
-        // Test add method
-        System.out.println("Adding children to the list:");
-        list.add(child1);
-        list.add(child2);
-        list.add(child3);
-        list.add(child4);
-        list.display(); // Display the list
+                if (type == 1) {
+                    // Assuming the last part is generation for GrandChildren
+                    int generation = Integer.parseInt(parts[3]);
+                    GrandChildren grandChild = new GrandChildren(name, age, generation);
+                    childrenList.add(grandChild);
+                } else if (type == 2) {
+                    // Assuming the last part is gender for Nephew
+                    boolean male = Boolean.parseBoolean(parts[3]);
+                    Nephew nephew = new Nephew(name, age, male);
+                    childrenList.add(nephew);
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.err.println("Error reading file: " + e.getMessage());
+        }
 
-        // Test size method
-        System.out.println("Size of the list: " + list.size());
+        // testing display
+        System.out.println("\nChildren Ordered List:");
+        childrenList.display();
+        System.out.println("\nSize of the list: " + childrenList.size());
 
-        // Test add at specific index
-        System.out.println("Adding a child at index 2:");
-        list.add(2, new Children("Eve", 9));
-        list.display(); // Display the list
+        // Test removing
+        Children target = new GrandChildren("Jorge", 29, 2); // Example target
+        boolean removed = childrenList.remove(target);
+        System.out.println("\nRemoved Jorge: " + removed);
+        System.out.println("\nChildren Ordered List after removal:");
+        childrenList.display();
 
-        // Test remove by item
-        System.out.println("Removing child Bob:");
-        list.remove(child2);
-        list.display(); // Display the list
+        // Test adding
+        System.out.println("adding back Jorge");
+        childrenList.add(target);
+        Children newChild = new GrandChildren("NewChild", 5, 1);
+        boolean addedAtIndex = childrenList.add(2, newChild);
+        System.out.println("\nAdded NewChild at index 2: " + addedAtIndex);
+        System.out.println("\nChildren Ordered List after adding NewChild:");
+        childrenList.display();
 
-        // Test remove by index
-        System.out.println("Removing child at index 1:");
-        list.remove(1);
-        list.display(); // Display the list
-
-        // Test indexOf method
-        System.out.println("Index of Charlie: " + list.indexOf(child3));
-        System.out.println("Index of Bob: " + list.indexOf(child2)); // Should return -1
-
-        // Test get method
-        System.out.println("Child at index 2: " + list.get(2).getName());
-
-        // Test size after removals
-        System.out.println("Size of the list after removals: " + list.size());
-
-        // Final display of the list
-        System.out.println("Final list contents:");
-        list.display();
+        // test indexOf
+        System.out.println("\nindex of Jorge: " + childrenList.indexOf(target));
+        System.out.println("index of newChild: " + childrenList.indexOf(newChild));
     }
 }

@@ -1,4 +1,3 @@
-package program3;
 
 /**
  * Represents a grandchild with a name, age, and generation.
