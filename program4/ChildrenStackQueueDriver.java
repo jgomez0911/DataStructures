@@ -1,4 +1,6 @@
-import java.util.*;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Stack;
 
 public class ChildrenStackQueueDriver {
 
@@ -7,7 +9,23 @@ public class ChildrenStackQueueDriver {
 
     }
 
-    public static <StackChildren> int stackToint(StackChildren s){
+    public static int stackToint(Stack<Children> s){
+        int result = 0;
+    Stack<Children> tempStack = new Stack<>();
+
+    while (!s.isEmpty()) {
+        Children child = s.pop();
+        tempStack.push(child);
+        result = result * 10 + child.getAge();
+    }
+
+    // Restore the original stack
+    while (!tempStack.isEmpty()) {
+        s.push(tempStack.pop());
+    }
+
+    return result;
+    }
 /*
 Assume that the input stack contains at least one Item. The method returns an int (not string) representation
 of the instance variables of the Items stored on the stack where the most significant digit is at the top of the
@@ -26,9 +44,6 @@ Required Test Cases:
 Note:  To avoid overflow on a standard Java int, please make sure that the total number of digits in the output is 8 or fewer.
 
 */
-        return 1;
-    }
-
     public static <StackChildren> int popSome(StackChildren s, int count){
 /*
 The method pops count items from the stack. The method returns the sum of the integer attributes of the popped items.
