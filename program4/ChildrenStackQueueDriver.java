@@ -18,55 +18,82 @@ public class ChildrenStackQueueDriver {
                 String name = parts[1];
                 int age = Integer.parseInt(parts[2]);
 
-                if (type == 1) {
-                    // Create a Children object
-                    stack.push(new Children(name, age));
-                } else if (type == 2) {
-                    // Create a GrandChildren object
-                    int generation = Integer.parseInt(parts[3]);
-                    queue.offer(new GrandChildren(name, age, generation));
-                } else if (type == 3) {
-                    // Create a Nephew object
-                    boolean male = Boolean.parseBoolean(parts[3]);
-                    queue.offer(new Nephew(name, age, male));
+                switch (type) {
+                    case 1 -> // Create a Children object
+                        stack.push(new Children(name, age));
+                    case 2 -> {
+                        // Create a GrandChildren object
+                        int generation = Integer.parseInt(parts[3]);
+                        queue.offer(new GrandChildren(name, age, generation));
+                    }
+                    case 3 -> {
+                        // Create a Nephew object
+                        boolean male = Boolean.parseBoolean(parts[3]);
+                        queue.offer(new Nephew(name, age, male));
+                    }
+                    default -> {
+                    }
                 }
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
-        // Example usage of the methods
-        System.out.println("Stack to int: " + stackToint(stack)); // Convert stack to int
-        System.out.println("Sum of popped ages: " + popSome(stack, 2)); // Pop some items and sum their ages
+        Stack<Children> stackZ = stack;
+        Stack<Children> stack1 = stack;
+        Stack<Children> stack2 = stack;
+        Stack<Children> stack3 = stack;
+        Stack<Children> stack4 = stack;
+
+         // Test cases for stackToint
+        System.out.println("\n---Testing stackToint---");
+        System.out.println("Stack to int: " + stackToint(stack)); // Test case 1: Stack with at least four items
+        stackZ.push(stack.pop());
+        System.out.printf("Stack to int with one object: %d\n", stackToint(stackZ));
+        stackZ.push(stack.pop()); stackZ.push(stack.pop());
+        Children test = new Children("TestChild", 0);
+        stackZ.push(test); // Test case 3: Adding a child with age 0
+        System.out.printf("Stack to int with age 0: %d\n", stackToint(stackZ)); // Test case 3
+
+        // Test cases for popSome
+        System.out.println("\n---Testing popSome---");
+        System.out.println("Sum of popped ages (2 items): " + popSome(stack, 2));
+        System.out.println("Sum of popped ages (4 items): " + popSome(stackZ, 4));
+        System.out.println("Sum of popped ages (0 items): " + popSome(stackZ, 0));
+        System.out.println("Sum of popped ages (0 items): " + popSome(stackZ, 1));
+        System.out.println("Sum of popped ages (0 items): " + popSome(stackZ, -1));
 
         // Example of extracting from stack
+        System.out.println("\n---Testing extractFromStack---");
         Children childToExtract = new Children("Vania", 31);
-        int extractedCount = extractFromStack(stack, childToExtract);
+        int extractedCount = extractFromStack(stack1, childToExtract);
         System.out.println("Extracted count: " + extractedCount);
 
         // Example of checking equality of two stacks
-        Stack<Children> anotherStack = new Stack<>();
-        anotherStack.push(new Children("Fido", 13));
-        anotherStack.push(new Children("Spot", 8));
-        System.out.println("Stacks are equal: " + equalStacks(stack, anotherStack));
+        System.out.println("\n---Testing equality---");
+        System.out.println("Stacks are equal: " + equalStacks(stack2, stack3));
+        System.out.println("Stacks are equal: " + equalStacks(stack2, stackZ));
 
         // Example of replacing in queue
+        System.out.println("\n---Testing replacing---");
         int replacedCount = replace(queue, new Nephew("Daniel", 6, true), new Nephew("Daniel", 6, false));
         System.out.println("Replaced count in queue: " + replacedCount);
 
         // Example of swapping stack and queue
+        System.out.println("\n---Testing swapping---");
         swap(stack, queue);
-        System.out.println("After swapping, stack: " + stack);
-        System.out.println("After swapping, queue: " + queue);
+        System.out.println("After swapping, stack: " + stack.toString());
+        System.out.println("After swapping, queue: " + queue.toString());
 
         // Example of splitting the queue
+        System.out.println("\n---Testing splitting---");
         Queue<Children>[] splitQueues = split(queue);
-        System.out.println("GrandChildren Queue: " + splitQueues[0]);
-        System.out.println("Nephew Queue: " + splitQueues[1]);
+        System.out.println("GrandChildren Queue: " + splitQueues[1]);
+        System.out.println("Nephew Queue: " + splitQueues[2]);
     }
 
     public static int stackToint(Stack<Children> s){
-       /*
+/*
 Assume that the input stack contains at least one Item. The method returns an int (not string) representation
 of the instance variables of the Items stored on the stack where the most significant digit is at the top of the
 stack. When the method has finished, the input stack must remain unchanged.
@@ -84,25 +111,26 @@ Required Test Cases:
 Note:  To avoid overflow on a standard Java int, please make sure that the total number of digits in the output is 8 or fewer.
 
 */
-    int result = 0;
-    Stack<Children> tempStack = new Stack<>();
+        StringBuilder stack = new StringBuilder();
+        Stack<Children> tempStack = new Stack<>();
 
-    while (!s.isEmpty()) {
-        Children child = s.pop();
-        tempStack.push(child);
-        result = result * 10 + child.getAge();
+        while (!s.isEmpty()) {
+            Children child = s.pop();
+            tempStack.push(child);
+            stack.append(child.getAge());
+            if (stack.length()>=8) break;
+        }
+
+        // Restore the original stack
+        while (!tempStack.isEmpty()) {
+            s.push(tempStack.pop());
+        }
+
+        return Integer.parseInt(stack.toString());
     }
 
-    // Restore the original stack
-    while (!tempStack.isEmpty()) {
-        s.push(tempStack.pop());
-    }
-
-    return result;
-    }
-
-public static int popSome(Stack<Children> s, int count) {
-   /*
+    public static int popSome(Stack<Children> s, int count) {
+/*
 The method pops count items from the stack. The method returns the sum of the integer attributes of the popped items.
 If the stack has less than count values, pop the entire stack, and the method returns -1. The input stack is changed
 because some items are popped.
@@ -303,7 +331,6 @@ Required Test Cases:
 
     while (!q.isEmpty()) {
         Children child = q.poll();
-        // Assuming GrandChildren and Nephew are subclasses of Children
         if (child instanceof GrandChildren) {
             grandChildrenQueue.offer(child);
         } else if (child instanceof Nephew) {
@@ -318,7 +345,7 @@ Required Test Cases:
         q.offer(ChildrenQueue.poll());
     }
 
-    return new Queue[]{grandChildrenQueue, nephewQueue};
+    return new Queue[]{ChildrenQueue,grandChildrenQueue, nephewQueue};
     }
 
 }
