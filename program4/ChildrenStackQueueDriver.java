@@ -1,12 +1,68 @@
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.*;
 
 public class ChildrenStackQueueDriver {
 
 
     public static void main(String[] args) {
+        Stack<Children> stack = new Stack<>();
+        Queue<Children> queue = new LinkedList<>();
 
+        // Read from the info.txt file and populate the stack and queue
+        try (Scanner scanner = new Scanner(new File("program4/info.txt"))) {
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                String[] parts = line.split("\\s+");
+                int type = Integer.parseInt(parts[0]);
+                String name = parts[1];
+                int age = Integer.parseInt(parts[2]);
+
+                if (type == 1) {
+                    // Create a Children object
+                    stack.push(new Children(name, age));
+                } else if (type == 2) {
+                    // Create a GrandChildren object
+                    int generation = Integer.parseInt(parts[3]);
+                    queue.offer(new GrandChildren(name, age, generation));
+                } else if (type == 3) {
+                    // Create a Nephew object
+                    boolean male = Boolean.parseBoolean(parts[3]);
+                    queue.offer(new Nephew(name, age, male));
+                }
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        // Example usage of the methods
+        System.out.println("Stack to int: " + stackToint(stack)); // Convert stack to int
+        System.out.println("Sum of popped ages: " + popSome(stack, 2)); // Pop some items and sum their ages
+
+        // Example of extracting from stack
+        Children childToExtract = new Children("Vania", 31);
+        int extractedCount = extractFromStack(stack, childToExtract);
+        System.out.println("Extracted count: " + extractedCount);
+
+        // Example of checking equality of two stacks
+        Stack<Children> anotherStack = new Stack<>();
+        anotherStack.push(new Children("Fido", 13));
+        anotherStack.push(new Children("Spot", 8));
+        System.out.println("Stacks are equal: " + equalStacks(stack, anotherStack));
+
+        // Example of replacing in queue
+        int replacedCount = replace(queue, new Nephew("Daniel", 6, true), new Nephew("Daniel", 6, false));
+        System.out.println("Replaced count in queue: " + replacedCount);
+
+        // Example of swapping stack and queue
+        swap(stack, queue);
+        System.out.println("After swapping, stack: " + stack);
+        System.out.println("After swapping, queue: " + queue);
+
+        // Example of splitting the queue
+        Queue<Children>[] splitQueues = split(queue);
+        System.out.println("GrandChildren Queue: " + splitQueues[0]);
+        System.out.println("Nephew Queue: " + splitQueues[1]);
     }
 
     public static int stackToint(Stack<Children> s){
