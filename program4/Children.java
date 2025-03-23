@@ -18,6 +18,11 @@
         this.name = name;
         this.age = age;
     }
+    // Copy constructor
+    public Children(Children other) {
+        this.name = other.name;
+        this.age = other.age;
+    }
     // getters
     public String getName(){
         return this.name;
@@ -36,10 +41,10 @@
     // boolean
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (!(obj instanceof Children)) return false;
-        Children other = (Children) obj;
-        return this.name.equals(other.name) && this.age == other.age;
+        if (this == obj) return true; // Check if they are the same object
+        if (obj == null || getClass() != obj.getClass()) return false; // Check for null and type
+        Children children = (Children) obj; // Cast to Children
+        return age == children.age && name.equals(children.name); // Compare relevant fields
     }
 
     @Override
