@@ -511,5 +511,4 @@ public class ChildrenStackQueueDriver {
             System.out.printf("%s  %d, ",child.getName(),child.getAge());
         }
     }
-
 }
