@@ -2,6 +2,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
 
+/**
+ * The ChildrenStackQueueDriver class demonstrates the use of stacks and queues
+ * to manage and manipulate Children objects. It reads data from a file, populates
+ * a stack and a queue, and performs various operations such as extraction, replacement,
+ * and swapping of elements.
+ */
 public class ChildrenStackQueueDriver {
     public static void main(String[] args) {
         Stack<Children> stack = new Stack<>();
@@ -33,7 +39,9 @@ public class ChildrenStackQueueDriver {
                     default -> {}
                 }
             }
-        } catch (FileNotFoundException e) {e.printStackTrace();}
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
         // making copys of the stacks for each method
         Stack<Children> toInt = new Stack<>();
@@ -242,6 +250,12 @@ public class ChildrenStackQueueDriver {
         System.out.println("Nephew Queue: " + splitQueuesE[2]);
     }
 
+    /**
+     * Converts the ages of children in the stack to an integer.
+     *
+     * @param s the stack of Children objects
+     * @return the integer representation of the ages
+     */
     public static int stackToint(Stack<Children> s) {
         // Use a String to accumulate the ages
         String results = "";
@@ -268,6 +282,12 @@ public class ChildrenStackQueueDriver {
         return Integer.parseInt(results);
     }
 
+    /**
+     * Pops a specified number of children from the stack and sums their ages.
+     * @param s     the stack of Children objects
+     * @param count the number of children to pop
+     * @return the sum of the ages of the popped children, or -1 if fewer children were popped
+     */
     public static int popSome(Stack<Children> s, int count) {
 
         if (count <= 0) return 0;
@@ -288,6 +308,12 @@ public class ChildrenStackQueueDriver {
         return sum;
     }
 
+    /**
+    * Extracts children from the stack that match a specified child.
+    * @param s the stack of Children objects
+    * @param i the child to extract
+    * @return the count of extracted children
+    */
     public static int extractFromStack(Stack<Children> s, Children i) {
         Stack<Children> tempStack = new Stack<>();
         int count = 0;
@@ -309,6 +335,12 @@ public class ChildrenStackQueueDriver {
         return count;
     }
 
+    /**
+     * Checks if two stacks of Children objects are equal.
+     * @param s1 the first stack
+     * @param s2 the second stack
+     * @return true if the stacks are equal, false otherwise
+     */
     public static boolean equalStacks(Stack<Children> s1, Stack<Children> s2) {
         // Check if the sizes are equal
         if (s1.size() != s2.size()) return false;
@@ -347,6 +379,13 @@ public class ChildrenStackQueueDriver {
         return true;
     }
 
+    /**
+    * Replaces occurrences of an old value in a queue with a new value.
+    * @param q      the queue of Children objects
+    * @param oldVal the value to be replaced
+    * @param newVal the new value to insert
+    * @return the count of replacements made
+    */
     public static int replace(Queue<Children> q, Children oldVal, Children newVal) {
         int count = 0;
         int size = q.size(); // Store the initial size of the queue
@@ -372,6 +411,12 @@ public class ChildrenStackQueueDriver {
         return count; // Return the count of replacements
     }
 
+    /**
+    * Swaps the contents of a stack and a queue.
+    *
+    * @param s the stack of Children objects
+    * @param q the queue of Children objects
+    */
     public static void swap(Stack<Children> s, Queue<Children> q) {
         if (s.isEmpty() && q.isEmpty()) return;
 
@@ -399,6 +444,12 @@ public class ChildrenStackQueueDriver {
         }
     }
 
+    /**
+    * Splits a queue of Children objects into three separate queues based on their type.
+    *
+    * @param q the queue to split
+    * @return an array of queues containing Children, GrandChildren, and Nephew objects
+    */
     @SuppressWarnings("unchecked")
     public static Queue<Children>[] split(Queue<Children> q) {
 
@@ -425,6 +476,10 @@ public class ChildrenStackQueueDriver {
         return new Queue[]{ChildrenQueue,grandChildrenQueue, nephewQueue};
     }
 
+    /**
+     * Prints the contents of a queue of Children objects.
+     * @param queue the queue to print
+     */
     public static void printQueue(Queue<Children> queue) {
         System.out.println(); // New line after printing the queue
         // Create a temporary queue to hold the elements
@@ -447,6 +502,10 @@ public class ChildrenStackQueueDriver {
         System.out.println(); // New line after printing the queue
     }
 
+    /**
+     * Prints the contents of a stack of Children objects.
+     * @param s the stack to print
+     */
     public static void printStack(Stack<Children>s){
         for (Children child : s) {
             System.out.printf("%s  %d, ",child.getName(),child.getAge());
