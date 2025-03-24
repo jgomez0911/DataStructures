@@ -30,13 +30,10 @@ public class ChildrenStackQueueDriver {
                         boolean male = Boolean.parseBoolean(parts[3]);
                         queue.offer(new Nephew(name, age, male));
                     }
-                    default -> {
-                    }
+                    default -> {}
                 }
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        } catch (FileNotFoundException e) {e.printStackTrace();}
 
         // making copys of the stacks for each method
         Stack<Children> toInt = new Stack<>();
@@ -46,6 +43,7 @@ public class ChildrenStackQueueDriver {
         Stack<Children> rPlace = new Stack<>();
         Stack<Children> extra = new Stack<>();
         Stack<Children> swp = new Stack<>();
+        Stack<Children> empty = new Stack<>();
 
         for (Children child : stack) {
             toInt.push(new Children(child));
@@ -56,9 +54,9 @@ public class ChildrenStackQueueDriver {
             extra.push(new Children(child));
             swp.push(new Children(child));
         }
-/*
+
          // Test cases for stackToint
-        System.out.println("\n---Testing stackToint---");
+        System.out.println("\n----Testing stackToint----------");
         System.out.println("Stack to int: " + stackToint(stack)); // Test case 1: Stack with at least four items
         Stack<Children> oneItem = new Stack<>();
         Children test = new Children("TestChild", 5);
@@ -71,22 +69,20 @@ public class ChildrenStackQueueDriver {
         toInt.pop(); toInt.pop(); toInt.pop();
 
         // Test cases for popSome
-        System.out.println("\n---Testing popSome---");
+        System.out.println("\n----Testing popSome----------");
         System.out.println("Sum of popped ages (count 2): " + popSome(some, 2));
-        System.out.println("Sum of popped ages (count 5): " + popSome(some, 5));
+        System.out.println("Sum of popped ages (count 4): " + popSome(some, 4));
         System.out.println("Sum of popped ages (0 items): " + popSome(some, 0));
         System.out.println("Sum of popped ages (0 items): " + popSome(some, 1));
         System.out.println("Sum of popped ages (0 items): " + popSome(some, -1));
 
         // Example of extracting from stack
-        System.out.println("\n---Testing extractFromStack---");
+        System.out.println("\n----Testing extractFromStack----------");
         Children childToExtract = new Children("Jorge", 29);
 
         // current stack
         System.out.println("curent stack:");
-        for (Children child : extractFS) {
-            System.out.printf("%s  %d, ",child.getName(),child.getAge());
-        }
+        printStack(extractFS);
         int extractedCount = extractFromStack(extractFS, childToExtract);
         System.out.println("\nafter extraction count: " + extractedCount); // matches 1
 
@@ -138,40 +134,28 @@ public class ChildrenStackQueueDriver {
         }
 
         // Example of checking equality of two stacks
-        System.out.println("\n---Testing equality---");
+        System.out.println("\n----Testing equality----------");
         System.out.print("Stack 1: ");
-        for (Children child : rPlace) {
-            System.out.printf("%s  %d, ",child.getName(),child.getAge());
-        }
+        printStack(rPlace);
         System.out.println();
         System.out.print("Stack 2: ");
-        for (Children child : toInt) {
-            System.out.printf("%s  %d, ",child.getName(),child.getAge());
-        }
+        printStack(toInt);
         System.out.println("\nStacks are equal: " + equalStacks(rPlace, toInt));
 
         System.out.print("\nStack 1: ");
-        for (Children child : rPlace) {
-            System.out.printf("%s  %d, ",child.getName(),child.getAge());
-        }
+        printStack(rPlace);
         System.out.println();
         extra.pop();
         System.out.print("Stack 2: ");
-        for (Children child : extra) {
-            System.out.printf("%s  %d, ",child.getName(),child.getAge());
-        }
+        printStack(extra);
         System.out.println("\nStacks are equal: " + equalStacks(rPlace, extra));
 
         System.out.print("\nStack 1: ");
-        for (Children child : rPlace) {
-            System.out.printf("%s  %d, ",child.getName(),child.getAge());
-        }
+        printStack(rPlace);
         System.out.println();
         extra.pop();
         System.out.print("Stack 2: ");
-        for (Children child : some) {
-            System.out.printf("%s  %d, ",child.getName(),child.getAge());
-        }
+        printStack(some);
         System.out.println("\nStacks are equal: " + equalStacks(rPlace, some));
 
         System.out.print("\nStack 1: ");
@@ -181,13 +165,11 @@ public class ChildrenStackQueueDriver {
         System.out.println();
         extra.pop();
         System.out.print("Stack 2: ");
-        for (Children child : some) {
-            System.out.printf("%s  %d, ",child.getName(),child.getAge());
-        }
+        printStack(some);
         System.out.println("\nStacks are equal: " + equalStacks(some, some));
 
         // Example of replacing in queue
-        System.out.println("\n---Testing replace---");
+        System.out.println("\n----Testing replace----------");
         // replace front
         printQueue(queue);
         int replacedCountf = replace(queue, new GrandChildren("Daniel", 6, 1), new GrandChildren("Daniel", 16, 2));
@@ -217,24 +199,47 @@ public class ChildrenStackQueueDriver {
         int replacedCounte = replace(queue, new Nephew("John", 16, true), new Nephew("Joe", 16, true));
         System.out.println("Replaced count in queue: " + replacedCounte);
         printQueue(queueE);
-*/
+
         // Example of swapping stack and queue
-        System.out.println("\n---Testing swapping---");
+        System.out.println("\n----Testing swapping----------");
         System.out.print("Stack: ");
-        printStack(swp);
-        printQueue(queue);
+        printStack(swp); printQueue(queue);
         swap(swp, queue);
         System.out.print("After swapping, \n\nStack: ");
-        printStack(swp);
-        printQueue(queue);
-/*
+        printStack(swp); printQueue(queue);
+        // empty queue
+        System.out.println("--Empty Queue--");
+        System.out.print("Stack: ");
+        printStack(swp); printQueue(queueE);
+        swap(swp, queueE);
+        System.out.print("After swapping, \n\nStack: ");
+        printStack(swp); printQueue(queueE);
+        // empty stack
+        System.out.println("--Empty Stack--");
+        System.out.print("Stack: ");
+        printStack(some); printQueue(queue);
+        swap(some, queue);
+        System.out.print("After swapping, \n\nStack: ");
+        printStack(some); printQueue(queue);
+        // both empty
+        System.out.println("--Both Empty--");
+        System.out.print("Stack: ");
+        printStack(empty); printQueue(queue);
+        swap(empty,queue);
+        System.out.print("After swapping, \n\nStack: ");
+        printStack(empty); printQueue(queue);
+
         // Example of splitting the queue
-        System.out.println("\n---Testing splitting---");
-        Queue<Children>[] splitQueues = split(queue);
+        System.out.println("\n----Testing splitting----------");
+        Queue<Children>[] splitQueues = split(queueE);
         System.out.println("Children Queue: " + splitQueues[0]);
         System.out.println("GrandChildren Queue: " + splitQueues[1]);
         System.out.println("Nephew Queue: " + splitQueues[2]);
-*/
+        System.out.println("\n---Empty Queue---");
+        Queue<Children>[] splitQueuesE = split(queueE);
+        System.out.println("Children Queue: " + splitQueuesE[0]);
+        System.out.println("GrandChildren Queue: " + splitQueuesE[1]);
+        System.out.println("Nephew Queue: " + splitQueuesE[2]);
     }
 
     public static int stackToint(Stack<Children> s) {
