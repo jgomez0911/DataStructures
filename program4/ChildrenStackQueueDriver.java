@@ -6,6 +6,7 @@ public class ChildrenStackQueueDriver {
     public static void main(String[] args) {
         Stack<Children> stack = new Stack<>();
         Queue<Children> queue = new LinkedList<>();
+        Queue<Children> queueE = new LinkedList<>();
 
         // Read from the info.txt file and populate the stack and queue
         try (Scanner scanner = new Scanner(new File("program4/info.txt"))) {
@@ -44,6 +45,7 @@ public class ChildrenStackQueueDriver {
         Stack<Children> eqstack = new Stack<>();
         Stack<Children> rPlace = new Stack<>();
         Stack<Children> extra = new Stack<>();
+        Stack<Children> swp = new Stack<>();
 
         for (Children child : stack) {
             toInt.push(new Children(child));
@@ -52,8 +54,9 @@ public class ChildrenStackQueueDriver {
             eqstack.push(new Children(child));
             rPlace.push(new Children(child));
             extra.push(new Children(child));
+            swp.push(new Children(child));
         }
-
+/*
          // Test cases for stackToint
         System.out.println("\n---Testing stackToint---");
         System.out.println("Stack to int: " + stackToint(stack)); // Test case 1: Stack with at least four items
@@ -182,21 +185,53 @@ public class ChildrenStackQueueDriver {
             System.out.printf("%s  %d, ",child.getName(),child.getAge());
         }
         System.out.println("\nStacks are equal: " + equalStacks(some, some));
-/*
-        // Example of replacing in queue
-        System.out.println("\n---Testing replacing---");
-        int replacedCount = replace(queue, new Nephew("Daniel", 6, true), new Nephew("Daniel", 6, false));
-        System.out.println("Replaced count in queue: " + replacedCount);
 
+        // Example of replacing in queue
+        System.out.println("\n---Testing replace---");
+        // replace front
+        printQueue(queue);
+        int replacedCountf = replace(queue, new GrandChildren("Daniel", 6, 1), new GrandChildren("Daniel", 16, 2));
+        System.out.println("Repalce Daniel 6 with Daniel 16");
+        System.out.println("Replaced count in queue: " + replacedCountf);
+        printQueue(queue);
+        // replace rear
+        int replacedCountr = replace(queue, new Nephew("Lorena", 27, false), new Nephew("Lorena", 16, false));
+        System.out.println("Repalce Lorena 27  with Lorena 16");
+        System.out.println("Replaced count in queue: " + replacedCountr);
+        printQueue(queue);
+        // adding more oldvalues
+        queue.offer(new Nephew("Ben", 1,true));queue.offer(new Nephew("Ben", 1,true));
+        System.out.println("--New Queue--");
+        printQueue(queue);
+        System.out.println("Repalce Ben 1  with Ben 16");
+        int replacedCountm = replace(queue, new Nephew("Ben", 1, true), new Nephew("Ben", 16, true));
+        System.out.println("Replaced count in queue: " + replacedCountm);
+        printQueue(queue);
+        // no old val
+        System.out.println("Repalce John 16  with Joe 16");
+        int replacedCountx = replace(queue, new Nephew("John", 16, true), new Nephew("Joe", 16, true));
+        System.out.println("Replaced count in queue: " + replacedCountx);
+        printQueue(queue);
+        // empty queue
+        System.out.println("Repalce Bob 16  with Bill 16");
+        int replacedCounte = replace(queue, new Nephew("John", 16, true), new Nephew("Joe", 16, true));
+        System.out.println("Replaced count in queue: " + replacedCounte);
+        printQueue(queueE);
+*/
         // Example of swapping stack and queue
         System.out.println("\n---Testing swapping---");
-        swap(stack, queue);
-        System.out.println("After swapping, stack: " + stack.toString());
-        System.out.println("After swapping, queue: " + queue.toString());
-
+        System.out.print("Stack: ");
+        printStack(swp);
+        printQueue(queue);
+        swap(swp, queue);
+        System.out.print("After swapping, \n\nStack: ");
+        printStack(swp);
+        printQueue(queue);
+/*
         // Example of splitting the queue
         System.out.println("\n---Testing splitting---");
         Queue<Children>[] splitQueues = split(queue);
+        System.out.println("Children Queue: " + splitQueues[0]);
         System.out.println("GrandChildren Queue: " + splitQueues[1]);
         System.out.println("Nephew Queue: " + splitQueues[2]);
 */
@@ -306,50 +341,56 @@ public class ChildrenStackQueueDriver {
         // If we exited the loop without finding a difference, the stacks are equal
         return true;
     }
-/*
-    public static int replace(Queue<Children> q, Children oldVal, Children newVal) {
 
+    public static int replace(Queue<Children> q, Children oldVal, Children newVal) {
         int count = 0;
-        int size = q.size();
+        int size = q.size(); // Store the initial size of the queue
+
+        // Use a temporary queue to hold the modified values
+        Queue<Children> tempQueue = new LinkedList<>();
 
         for (int i = 0; i < size; i++) {
-            Children child = q.poll();
+            Children child = q.poll(); // Remove the head of the queue
             if (child.equals(oldVal)) {
-                q.offer(newVal);
+                tempQueue.offer(newVal); // Replace with newVal
                 count++;
             } else {
-                q.offer(child);
+                tempQueue.offer(child); // Keep the original child
             }
         }
 
-        return count;
+        // Restore the original queue with the modified values
+        while (!tempQueue.isEmpty()) {
+            q.offer(tempQueue.poll());
+        }
+
+        return count; // Return the count of replacements
     }
 
     public static void swap(Stack<Children> s, Queue<Children> q) {
-
         if (s.isEmpty() && q.isEmpty()) return;
 
         Stack<Children> tempStack = new Stack<>();
         Queue<Children> tempQueue = new LinkedList<>();
 
-        // Swap top of stack with front of queue
-        if (!s.isEmpty()) {
+        // Move elements from stack to tempQueue
+        while (!s.isEmpty()) {
             tempQueue.offer(s.pop());
         }
+
+        // Move elements from queue to tempStack
         while (!q.isEmpty()) {
             tempStack.push(q.poll());
         }
+
+        // Move elements from tempStack to stack
         while (!tempStack.isEmpty()) {
-            q.offer(tempStack.pop());
+            s.push(tempStack.pop());
         }
-        while (!s.isEmpty()) {
-            tempStack.push(s.pop());
-        }
+
+        // Move elements from tempQueue to queue
         while (!tempQueue.isEmpty()) {
-            s.push(tempQueue.poll());
-        }
-        while (!tempStack.isEmpty()) {
-            q.offer(tempStack.pop());
+            q.offer(tempQueue.poll());
         }
     }
 
@@ -378,5 +419,33 @@ public class ChildrenStackQueueDriver {
 
         return new Queue[]{ChildrenQueue,grandChildrenQueue, nephewQueue};
     }
-*/
+
+    public static void printQueue(Queue<Children> queue) {
+        System.out.println(); // New line after printing the queue
+        // Create a temporary queue to hold the elements
+        Queue<Children> tempQueue = new LinkedList<>();
+
+        // Print the elements and add them to the temporary queue
+        System.out.print("Queue: ");
+        while (!queue.isEmpty()) {
+            Children child = queue.poll(); // Remove the head of the queue
+            System.out.printf("%s  %d, ",child.getName(),child.getAge()); // Print the child
+            tempQueue.offer(child); // Add to the temporary queue
+        }
+
+        // Restore the original queue
+        while (!tempQueue.isEmpty()) {
+            queue.offer(tempQueue.poll());
+        }
+
+        System.out.println(); // New line after printing the queue
+        System.out.println(); // New line after printing the queue
+    }
+
+    public static void printStack(Stack<Children>s){
+        for (Children child : s) {
+            System.out.printf("%s  %d, ",child.getName(),child.getAge());
+        }
+    }
+
 }
