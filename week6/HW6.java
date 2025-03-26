@@ -1,5 +1,5 @@
 package week6;
-
+/* 
 public class HW6{
     // this is given
     public class Node<E> {
@@ -110,3 +110,4 @@ public class HW6{
     }
 
 }
+    */
