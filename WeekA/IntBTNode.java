@@ -63,7 +63,5 @@ public class IntBTNode {
 		root.preorder(); System.out.println();
 		root.inorder(); System.out.println();
 		root.postorder(); System.out.println();
-
 	}
-
 }
