@@ -6,10 +6,10 @@ class MenuItem {
     private double price;
     private int quantity;
 
-    public MenuItem( MenuItem m, BSTNode l, BSTNode r ){
-        name = m.name;
-        l= null;
-        r= null;
+    public MenuItem( String name, double price, int quantity ){
+        this.name=name;
+        this.price=price;
+        this.quantity=quantity;
     }
 
     public String getName(){
@@ -36,5 +36,15 @@ class MenuItem {
         this.quantity = quantity;
     }
 
+    public boolean equals(MenuItem m){
 
+    }
+
+    public int compareTo(MenuItem m){
+
+    }
+
+    public String toString(){
+
+    }
 }
