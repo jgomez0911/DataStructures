@@ -36,15 +36,26 @@ class MenuItem {
         this.quantity = quantity;
     }
 
-    public boolean equals(MenuItem m){
-
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true; // Check if the same object
+        if (obj == null || getClass() != obj.getClass()) return false; // Check for null and class type
+        MenuItem menuItem = (MenuItem) obj; // Cast to MenuItem
+        return Double.compare(menuItem.price, price) == 0 && // Compare prices
+                    name.equals(menuItem.name); // Compare names
     }
 
-    public int compareTo(MenuItem m){
-
+    public int compareTo(MenuItem m) {
+    int nameComparison = this.name.compareTo(m.name);
+    if (nameComparison != 0) {
+        return nameComparison; // Compare by name first
     }
+    // If names are equal, compare by price
+    return Double.compare(this.price, m.price);
+}
 
-    public String toString(){
-
+    @Override
+    public String toString() {
+        return String.format("%s $%.2f %d  $%.2f}", name, price, quantity,(price*quantity));
     }
 }
