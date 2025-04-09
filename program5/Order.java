@@ -4,7 +4,7 @@ public class Order {
 
     private BSTNode root;
     private String tableID;
-    private static String restaurantName = "Your Restaurant Name"; // Set your restaurant name here
+    private static String restaurantName = "\nJ's Bar"; // Set your restaurant name here
 
     public Order(String tableID) {
         this.tableID = tableID;
@@ -136,8 +136,8 @@ public class Order {
         if (node == null) {
             return 0.0;
         }
-        return (node.getMenuItem().getPrice() * node.getMenuItem().getQuantity()) + 
-               getTotalBeforeTaxAndTipRec(node.getLeft()) + 
+        return (node.getMenuItem().getPrice() * node.getMenuItem().getQuantity()) +
+               getTotalBeforeTaxAndTipRec(node.getLeft()) +
                getTotalBeforeTaxAndTipRec(node.getRight());
     }
 
@@ -154,24 +154,41 @@ public class Order {
     // String representation of the Order
     @Override
     public String toString() {
-        String result = String.format("Restaurant: %s\nTable ID: %s\n", restaurantName, tableID);
-        return result + getOrderDetails();
+        StringBuilder result = new StringBuilder();
+        result.append(String.format("%s %s\n", restaurantName, tableID));
+        result.append("-------------------------------------------\n");
+        result.append(String.format("%-14s %-9s %-7s %-10s\n", "Item", "Price", "Qty", "Total"));
+        result.append("-------------------------------------------\n");
+
+        // Add menu items in a tabular format
+        toStringRec(root, result);
+
+        // Calculate totals
+        double totalBeforeTax = getTotalBeforeTaxAndTip();
+        double tax = getTax(8);
+        double tip = getTip(20);
+        double grandTotal = totalBeforeTax + tax + tip;
+
+        // Add totals to the result
+        result.append("-------------------------------------------\n");
+        result.append(String.format("Total:\t\t$ %.2f\n", totalBeforeTax));
+        result.append(String.format("Tax:\t\t$ %.2f\n", tax));
+        result.append(String.format("Tip:\t\t$ %.2f\n", tip));
+        result.append("-------------------------------------------\n");
+        result.append(String.format("Grand total:\t$ %.2f\n", grandTotal));
+
+        return result.toString();
     }
 
-    private String getOrderDetails() {
-        StringBuilder details = new StringBuilder();
-        getOrderDetailsRec(root, details);
-        return details.toString();
-    }
-
-    private void getOrderDetailsRec(BSTNode node, StringBuilder details) {
+    private void toStringRec(BSTNode node, StringBuilder result) {
         if (node != null) {
-            details.append(String.format("%s (Qty: %d, Price: %.2f)\n",
+            toStringRec(node.getLeft(), result);
+            result.append(String.format("%-14s $%-9.2f %-7d $%-9.2f\n",
                 node.getMenuItem().getName(),
+                node.getMenuItem().getPrice(),
                 node.getMenuItem().getQuantity(),
-                node.getMenuItem().getPrice()));
-            getOrderDetailsRec(node.getLeft(), details);
-            getOrderDetailsRec(node.getRight(), details);
+                node.getMenuItem().getPrice() * node.getMenuItem().getQuantity()));
+            toStringRec(node.getRight(), result);
         }
     }
 }
