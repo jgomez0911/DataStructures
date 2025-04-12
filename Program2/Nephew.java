@@ -1,4 +1,4 @@
-package Program2;
+package program2;
 
 /**
  * Represents a nephew with a name, age, and gender.
