@@ -68,12 +68,12 @@ public class RestaurantDriver {
         System.out.println("Total Before Tax and Tip: " + order1.getTotalBeforeTaxAndTip());
         System.out.println("Tax (8%): " + order1.getTax(8));
         System.out.println("Tip (20%): " + order1.getTip(20));
-        System.out.println("Searching for 'Pizza': " + order1.search("Pizza"));
-        System.out.println("Preorder Traversal:");
+        System.out.println("Searching for 'Pizza': \n" + order1.search("Pizza"));
+        System.out.println("\nPreorder Traversal:");
         order1.preorder();
-        System.out.println("Inorder Traversal:");
+        System.out.println("\nInorder Traversal:");
         order1.inorder();
-        System.out.println("Postorder Traversal:");
+        System.out.println("\nPostorder Traversal:");
         order1.postorder();
         System.out.println(order1.toString());
 
@@ -85,12 +85,12 @@ public class RestaurantDriver {
         System.out.println("Total Before Tax and Tip: " + order2.getTotalBeforeTaxAndTip());
         System.out.println("Tax (8%): " + order2.getTax(8));
         System.out.println("Tip (20%): " + order2.getTip(20));
-        System.out.println("Searching for 'Tacos': " + order2.search("Tacos"));
-        System.out.println("Preorder Traversal:");
+        System.out.println("Searching for 'Tacos': \n" + order2.search("Tacos"));
+        System.out.println("\nPreorder Traversal:");
         order2.preorder();
-        System.out.println("Inorder Traversal:");
+        System.out.println("\nInorder Traversal:");
         order2.inorder();
-        System.out.println("Postorder Traversal:");
+        System.out.println("\nPostorder Traversal:");
         order2.postorder();
         System.out.println(order2.toString());
     }

@@ -4,7 +4,7 @@ public class Order {
 
     private BSTNode root;
     private String tableID;
-    private static String restaurantName = "\nJ's Bar"; // Set your restaurant name here
+    private static String restaurantName = "\nJ's Bar";
 
     public Order(String tableID) {
         this.tableID = tableID;
