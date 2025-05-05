@@ -44,4 +44,9 @@ public abstract class Sort {
         }
         return true;
     }
+
+    public int[] getInitialTestArray() {
+        return initial[0];
+    }
+
 }

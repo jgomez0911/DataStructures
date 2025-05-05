@@ -1,4 +1,3 @@
-package program6;
 
 public class BubbleSort extends Sort {
     private int[][] sorted;
@@ -28,5 +27,9 @@ public class BubbleSort extends Sort {
                 }
             }
         }
+    }
+
+    public int[][] getSorted() {
+        return sorted;
     }
 }

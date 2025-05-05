@@ -1,4 +1,4 @@
-package program6;
+
 
 import java.util.Arrays;
 
@@ -16,5 +16,9 @@ public class ArraysSort extends Sort {
             System.out.println("Arrays.sort: Array of size " + sorted[i].length + " sorted in " + sw.elapsedTime() + " ms");
             System.out.println("Is sorted: " + isSorted(sorted[i]));
         }
+    }
+
+    public int[][] getSorted() {
+        return sorted;
     }
 }

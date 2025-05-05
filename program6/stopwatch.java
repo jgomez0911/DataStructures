@@ -1,4 +1,3 @@
-package program6;
 
 public class Stopwatch {
     private long startTime;

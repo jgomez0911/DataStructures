@@ -1,4 +1,4 @@
-package program6;
+
 
 public class MergeSort extends Sort {
     private int[][] sorted;
@@ -51,5 +51,9 @@ public class MergeSort extends Sort {
         while (j < n2) {
             array[k++] = R[j++];
         }
+    }
+
+    public int[][] getSorted() {
+        return sorted;
     }
 }
